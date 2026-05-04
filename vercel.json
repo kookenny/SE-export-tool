@@ -1,0 +1,17 @@
+{
+  "builds": [
+    { "src": "api/index.py", "use": "@vercel/python" },
+    { "src": "api/letter_generate.js", "use": "@vercel/node" },
+    { "src": "web/static/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/static/(.*)", "dest": "web/static/$1" },
+    { "src": "/api/letter/generate", "dest": "api/letter_generate.js" },
+    { "src": "/api/(.*)", "dest": "api/index.py" },
+    { "src": "/(.*)", "dest": "api/index.py" }
+  ],
+  "functions": {
+    "api/letter_generate.js": { "maxDuration": 60 },
+    "api/index.py": { "maxDuration": 60 }
+  }
+}

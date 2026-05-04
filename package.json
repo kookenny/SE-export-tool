@@ -1,0 +1,17 @@
+{
+  "name": "se-export-tool",
+  "version": "1.0.0",
+  "description": "Unified web tool for exporting checklists, risk libraries, notes, and letters from Caseware SE author templates.",
+  "main": "web/app.py",
+  "type": "commonjs",
+  "scripts": {
+    "sync": "python scripts/sync.py",
+    "test": "echo \"no tests\" && exit 0"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "docx": "^9.6.1",
+    "dotenv": "^17.4.2",
+    "node-fetch": "^2.7.0"
+  }
+}

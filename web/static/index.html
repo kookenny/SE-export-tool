@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE Export Tool</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <h1>SE Export Tool</h1>
+            <p>Export checklists, risk libraries, notes, and letters from Caseware SE author templates.</p>
+        </header>
+
+        <nav class="tab-strip" role="tablist">
+            <button class="tab-btn active" role="tab" data-tab="checklists" aria-selected="true">Checklists</button>
+            <button class="tab-btn" role="tab" data-tab="notes" aria-selected="false">Notes Library</button>
+            <button class="tab-btn" role="tab" data-tab="letter" aria-selected="false">Letter</button>
+            <button class="tab-btn" role="tab" data-tab="risks" aria-selected="false">Risk Library</button>
+        </nav>
+
+        <!-- Checklists -->
+        <main class="card tab-panel active" data-panel="checklists" role="tabpanel">
+            <h2>Extract Checklists</h2>
+            <div class="form-group">
+                <label for="checklists-url">Caseware Engagement or Document URL</label>
+                <input type="text" id="checklists-url" data-tool="checklists"
+                       placeholder="https://ca.cwcloudpartner.com/<tenant>/e/eng/<engagementId>/...">
+                <div class="helper-text" data-info="checklists">
+                    Paste an engagement URL (or include a document fragment to extract a single checklist)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="checklists-name">Report Name <span class="optional">(optional)</span></label>
+                <input type="text" id="checklists-name" placeholder="e.g. OnPoint Audit 2024">
+            </div>
+            <div class="actions">
+                <button class="btn-primary" data-submit="checklists">Extract Checklists</button>
+            </div>
+            <div class="status-area" data-status="checklists" hidden>
+                <div class="spinner"></div>
+                <span>Generating report&hellip; this may take 15&ndash;30 seconds</span>
+            </div>
+            <div class="error-message" data-error="checklists" hidden></div>
+            <div class="success-message" data-success="checklists" hidden></div>
+        </main>
+
+        <!-- Notes Library -->
+        <main class="card tab-panel" data-panel="notes" role="tabpanel" hidden>
+            <h2>Notes Visibility Report</h2>
+            <div class="form-group">
+                <label for="notes-url">Caseware Document URL</label>
+                <input type="text" id="notes-url" data-tool="notes"
+                       placeholder="https://ca.cwcloudpartner.com/<tenant>/e/eng/<engagementId>/index.jsp#/efinancials/<documentId>">
+                <div class="helper-text" data-info="notes">
+                    Paste a Caseware document URL (must include #/efinancials/&lt;documentId&gt;)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="notes-name">Report Name <span class="optional">(optional)</span></label>
+                <input type="text" id="notes-name" placeholder="e.g. My Template">
+            </div>
+            <div class="actions">
+                <button class="btn-primary" data-submit="notes">Generate Report</button>
+            </div>
+            <div class="status-area" data-status="notes" hidden>
+                <div class="spinner"></div>
+                <span>Generating report&hellip; this may take 15&ndash;30 seconds</span>
+            </div>
+            <div class="error-message" data-error="notes" hidden></div>
+            <div class="success-message" data-success="notes" hidden></div>
+        </main>
+
+        <!-- Letter -->
+        <main class="card tab-panel" data-panel="letter" role="tabpanel" hidden>
+            <h2>Export Letter</h2>
+            <div class="form-group">
+                <label for="letter-url">Caseware Letter URL</label>
+                <input type="text" id="letter-url" data-tool="letter"
+                       placeholder="https://ca.cwcloudpartner.com/<tenant>/e/eng/<engagementId>/...#/letter/<documentId>">
+                <div class="helper-text" data-info="letter">
+                    Paste a Caseware letter URL (must include #/letter/&lt;documentId&gt;)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="letter-name">Report Name <span class="optional">(optional)</span></label>
+                <input type="text" id="letter-name" placeholder="e.g. Engagement Letter">
+            </div>
+            <div class="actions">
+                <button class="btn-primary" data-submit="letter">Export Letter</button>
+            </div>
+            <div class="status-area" data-status="letter" hidden>
+                <div class="spinner"></div>
+                <span>Generating Word document&hellip; this may take 30&ndash;60 seconds</span>
+            </div>
+            <div class="error-message" data-error="letter" hidden></div>
+            <div class="success-message" data-success="letter" hidden></div>
+        </main>
+
+        <!-- Risk Library -->
+        <main class="card tab-panel" data-panel="risks" role="tabpanel" hidden>
+            <h2>Export Risk Library</h2>
+            <div class="form-group">
+                <label for="risks-url">Caseware Engagement URL</label>
+                <input type="text" id="risks-url" data-tool="risks"
+                       placeholder="https://ca.cwcloudpartner.com/<tenant>/e/eng/<engagementId>/...">
+                <div class="helper-text" data-info="risks">
+                    Paste a Caseware engagement URL
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="risks-name">Report Name <span class="optional">(optional)</span></label>
+                <input type="text" id="risks-name" placeholder="e.g. Canadian Audit Risk Library">
+            </div>
+            <div class="actions">
+                <button class="btn-primary" data-submit="risks">Export Risk Library</button>
+            </div>
+            <div class="status-area" data-status="risks" hidden>
+                <div class="spinner"></div>
+                <span>Generating report&hellip; this may take 15&ndash;30 seconds</span>
+            </div>
+            <div class="error-message" data-error="risks" hidden></div>
+            <div class="success-message" data-success="risks" hidden></div>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

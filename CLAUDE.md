@@ -2,6 +2,8 @@
 
 A unified Flask app at `web/app.py` that hosts four CaseWare SE export tools (Checklists, Risk Library, Notes, Letter) behind one tabbed UI.
 
+**Live deployment:** https://kookenny-se-export-tool.vercel.app/ (Vercel project name `kookenny-se-export-tool`)
+
 ## Architecture
 
 - **Single source of truth lives in sibling project folders**, not here. Each tool's core extraction module is owned by its standalone project (`../Checklist extractor/`, `../Risk library export/`, `../Note visibility/`, `../Letter export/`).

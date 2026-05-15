@@ -44,6 +44,20 @@ Each accepts `{url, templateName}` JSON. URL parsing patterns are duplicated fro
 - Letter URLs MUST include a `#/letter/<id>` or `#/efinancials/<id>` fragment.
 - Sibling folder names contain spaces ("Checklist extractor"). The path resolver handles this — but if you rename a sibling, update both `web/app.py:_import_tool` calls and `scripts/sync.py:COPIES`.
 
+## Credential lookup (multi-region)
+
+All four tools share the same OAuth lookup order, applied per request based on the pasted URL:
+
+1. **`CW_<TENANT-PREFIX>_*`** — e.g. tenant `uk-develop` → `CW_UK_CLIENT_ID` / `CW_UK_CLIENT_SECRET`
+2. **`CW_<HOST-PREFIX>_*`** — e.g. host `eu.cwcloudpartner.com` → `CW_EU_CLIENT_ID` / `CW_EU_CLIENT_SECRET`
+3. **`CW_CLIENT_ID` / `CW_CLIENT_SECRET`** — generic fallback
+
+The tenant prefix is the first segment of the path tenant (split on `-`), uppercased. The host prefix is the first DNS label of the hostname, uppercased.
+
+This matters when a tenant is hosted on a different region's host — e.g. `uk-develop` runs on `eu.cwcloudpartner.com`. If only `CW_EU_*` is set, EU credentials are tried but the CaseWare API rejects them for the UK tenant with HTTP 400. Set `CW_UK_*` to fix.
+
+Make sure the matching env vars exist locally (`.env`) **and** in the Vercel project settings. The auth code lives in each sibling's `tools/<module>.py` — it's not duplicated here.
+
 ## Adding a fifth tool (e.g. Hyperlink identifier)
 
 See `workflows/add_new_tool.md` for the recipe.

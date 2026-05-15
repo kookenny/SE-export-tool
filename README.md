@@ -72,6 +72,16 @@ All targets are gitignored — they are build artifacts, refreshed each deploy.
 
 Set the same `CW_*` env vars in the Vercel project settings.
 
+### Credentials and regions
+
+Each request derives OAuth credentials from the pasted URL, trying:
+
+1. `CW_<TENANT-PREFIX>_*` — e.g. tenant `uk-develop` → `CW_UK_CLIENT_ID` / `CW_UK_CLIENT_SECRET`
+2. `CW_<HOST-PREFIX>_*` — e.g. host `eu.cwcloudpartner.com` → `CW_EU_CLIENT_ID` / `CW_EU_CLIENT_SECRET`
+3. Generic `CW_CLIENT_ID` / `CW_CLIENT_SECRET`
+
+Currently configured: Canada (`CW_CA_*`), United States (`CW_US_*`), Europe (`CW_EU_*`), United Kingdom (`CW_UK_*` — UK tenants run on the EU host). Add credentials for a new region/tenant by setting the matching prefixed env vars locally and on Vercel; no code change needed.
+
 ## How sibling-vs-synced resolution works
 
 `web/app.py` defines a `_import_tool(folder, module)` helper that tries the sibling first (`../<folder>/tools/<module>.py`) and falls back to `tools/_synced/<module>.py`. Locally the sibling exists; on Vercel only the synced copy exists. Either way the same Flask routes work.
